@@ -1,9 +1,22 @@
 import sqlite3
+from unittest import result
 
 from src.domain.items import ItemsRepository
 
 # database_path = "data/database.db"
-
+class SellerInfo:
+    def __init__(self,seller_name,seller_email,seller_phone):
+        self.seller_name = seller_name
+        self.seller_email = seller_email
+        self.seller_phone = seller_phone
+        
+    
+    def to_dict(self):
+        return {
+            "seller_name": self.seller_name,
+            "seller_email": self.seller_email,
+            "seller_phone": self.seller_phone
+        }
 
 class StoreSeller:
     def __init__(
@@ -91,6 +104,25 @@ class StoreSellerRepository:
             result.append(store_seller)
         return result
 
+    def get_seller_info_for_buyer(self,item_id):
+        sql="""
+        SELECT storeSeller.seller_name, storeSeller.seller_email,storeSeller.seller_phone FROM storeSeller
+        INNER JOIN storeItems on storeSeller.store_id = storeItems.store_id
+        INNER JOIN items on storeItems.item_id = items.item_id
+        WHERE storeItems.item_id =:item_id
+        """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, {"item_id": item_id})
+        data = cursor.fetchone()
+        seller_info = SellerInfo(**data).to_dict()
+        print(seller_info)
+        return seller_info
+        
+       
+
+        
+
     def save_store_seller(self, store):
         sql = """insert into storeSeller (store_id,store_name,store_description,seller_name,seller_email,seller_phone,store_category) 
         values (:store_id,:store_name, :store_description, :seller_name, :seller_email, :seller_phone,  :store_category)"""
@@ -107,9 +139,12 @@ class StoreSellerRepository:
         cursor = conn.cursor()
         cursor.execute(sql, {"store_id": store_id})
         data = cursor.fetchone()
+        result = []
         if dict(data):
             store_seller = StoreSeller(**data)
             store_seller.items = self.items_repository.get_items_by_store_seller_id(
                 store_id
             )
+            
+        
         return store_seller

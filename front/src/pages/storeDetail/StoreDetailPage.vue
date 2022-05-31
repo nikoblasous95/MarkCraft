@@ -5,8 +5,13 @@
         <router-link to="/">Landing</router-link>
       </div>
     </div>
+    <div class="shop">
+        <button class="shopButton" @click=" openShopCart()">
+          🛒
+        </button>
+      </div>
     <div class="filters">
-      <input class="inputFilter" type="text" placeholder="Escribe aqui tu busqueda">
+      <input class="inputFilter" type="text" placeholder="Escribe aqui tu busqueda" v-model="filterBySearch">
     </div>
     <div class="image">
      <img src="@/assets/img/bilbo.png" alt="logo prueba">
@@ -16,12 +21,17 @@
         <h1>{{store.store_name}}</h1>
         <h4>{{store.store_description}}</h4>
         <div class="items">
-        <div  class="item" v-for=" item in store.items" :key="item.id">
-        <div @click="openItemDetail(item)">
-          <img class="itemImage" src="@/assets/img/pexel.png" alt="imagen prueba">
-          <p>{{item.item_name}}</p>
-          <p>{{item.item_description}}</p>
-          <p>{{item.item_category}}</p></div>
+        <div  class="item" v-for=" (item,index) in filteredItems" :key="index">
+          <div @click="openItemDetail(item)">
+            <img class="itemImage" src="@/assets/img/pexel.png" alt="imagen prueba">
+            <p>{{item.item_name}}</p>
+            <p>{{item.item_description}}</p>
+            <p>{{item.item_category}}</p>
+          </div>
+          <div>
+            <button @click="addItem(item)">añadir al carrito</button>
+          </div>
+
           
           </div>
           </div>
@@ -33,24 +43,66 @@
 
 <script>
 import { loadData } from "@/services/api.js";
+import {addItemToCart} from "@/services/shopingCart.js";
 export default {
   name: "storeDetail",
   data() {
     return {
-      store: [{}],
+      store:{},
+      filterBySearch:"",
     };
   },
-  mounted() {
-    this.loadData();
+    created() {
+      this.loadData();
+    },
+  computed: {
+    filteredItems(){
+      let result = []
+      let store = this.store
+      for (let item of store.items){
+        console.log(item)
+        if (this.isStoreInFilter(item)){
+          result.push(item)
+        }
+      }
+      return result
+    }
   },
   methods: {
     async loadData() {
       let storeId = this.$route.params.id;
       this.store = await loadData(storeId);
+      console.log(this.store)
     },
     openItemDetail(item) {
+      console.log(item)
       this.$router.push("/storeDetail/"+ this.$route.params.id +"/"+ item.item_id);
     },
+    
+    addItem(item){
+      addItemToCart(item)
+      
+    },
+    isStoreInFilter(item){
+      let seller =item.item_name.toLowerCase()
+      console.log(seller)
+      // let description = item.item_description.toLowerCase()
+      // let itemCategory = item.item_category.toLowerCase()
+
+      if (this.filterBySearch === ""){
+        return true
+      }
+      if (seller.includes(this.filterBySearch)){
+        return true
+      }
+      else {
+        return false
+      }
+    },
+     openShopCart() {
+      this.$router.push("/shopCart");
+    },
+   
   },
 };
 </script>
@@ -75,7 +127,7 @@ export default {
  
 }
 .inputFilter{
-  width: 40%;
+  width: 60%;
   height: 25px;
   align-content: center;
 }
@@ -92,6 +144,17 @@ export default {
   /* background-color: rgb(208, 245, 245); */
   padding-top: 2em;
 }
+.shop{
+  grid-area: shop;
+ padding-top: 2em;
+ 
+}
+.shopButton{
+  align-content: center;
+  width: 30%;
+  height: 30px;
+  
+}
 .gridContainer{
   width: 100vw;
   min-height: 100vh;
@@ -101,7 +164,7 @@ export default {
   grid-template-rows: 0.2fr 0.3fr 1fr 1fr;
   grid-template-areas:
     "nav nav nav nav"
-    "filters filters filters filters"
+    "filters filters filters shop"
     "image image main main "
     "image image main main "
     "image image main main";

@@ -10,11 +10,15 @@
       <input  class="inputFilter" name="filterBySearch" v-model="filterBySearch" placeholder="Escribe aqui tu busqueda">
       
       </div>
+      <div class="shop">
+        <button class="shopButton" @click=" openShopCart()">
+          🛒
+        </button>
+      </div>
     <div class="landing">
       <div class="stores" v-for="store in filteredStores" :key="store.store_id" >
         <div class="store" @click="openStoreDetail(store)">
           <img src="@/assets/img/logo.png" alt="Foto prueba" class="image" />
-          
           <p>{{ store.store_name }}</p>
           <p>{{ store.store_description }}</p>
           <p>{{ store.seller_name }}</p>
@@ -76,6 +80,9 @@ export default {
     openStoreDetail(store) {
       this.$router.push("/storeDetail/" + store.store_id);
     },
+    openShopCart() {
+      this.$router.push("/shopCart");
+    },
     itemFilter(store){
       for (let item of store.items){
         return item.item_category.toLowerCase()
@@ -112,7 +119,17 @@ export default {
   flex-direction: row;
   margin: 5px;
 }
-
+.shop{
+  grid-area: shop;
+ padding-top: 2em;
+ 
+}
+.shopButton{
+  align-content: center;
+  width: 30%;
+  height: 30px;
+  
+}
 
 .image {
   width: 40%;
@@ -126,13 +143,13 @@ export default {
   grid-template-rows: 0.2fr 0.3fr 1fr 1fr;
   grid-template-areas:
     "nav nav nav"
-    "filters filters filters "
+    "filters filters shop "
     "main main main "
     "main main main "
     "main main main";
 }
 .inputFilter{
-  width: 40%;
+  width: 60%;
   height: 25px;
   align-content: center;
 }
