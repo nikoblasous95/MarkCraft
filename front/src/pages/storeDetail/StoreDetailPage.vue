@@ -9,6 +9,7 @@
         <button class="shopButton" @click=" openShopCart()">
           🛒
         </button>
+        <!-- <button @click="adminMenu()" v-if="autorizacion">Herramienta</button> -->
       </div>
     <div class="filters">
       <input class="inputFilter" type="text" placeholder="Escribe aqui tu busqueda" v-model="filterBySearch">
@@ -21,13 +22,13 @@
         <h1>{{store.store_name}}</h1>
         <h4>{{store.store_description}}</h4>
         <div class="items">
-        <div  class="item" v-for=" (item,index) in filteredItems" :key="index">
+        <div  class="item" v-for=" (item,index) in filteredItems || []" :key="index">
           <div @click="openItemDetail(item)">
-            <img class="itemImage" src="@/assets/img/pexel.png" alt="imagen prueba">
+            <img class="itemImage" src="@/assets/img/pexel.png" alt="imagen prueba"> 
             <p>{{item.item_name}}</p>
             <p>{{item.item_description}}</p>
             <p>{{item.item_category}}</p>
-          </div>
+           </div>
           <div>
             <button @click="addItem(item)">añadir al carrito</button>
           </div>
@@ -50,10 +51,15 @@ export default {
     return {
       store:{},
       filterBySearch:"",
+      autorizacion:false,
     };
   },
     created() {
       this.loadData();
+      
+    },
+    mounted(){
+    //   this.autorization();
     },
   computed: {
     filteredItems(){
@@ -72,13 +78,19 @@ export default {
     async loadData() {
       let storeId = this.$route.params.id;
       this.store = await loadData(storeId);
-      console.log(this.store)
     },
     openItemDetail(item) {
       console.log(item)
       this.$router.push("/storeDetail/"+ this.$route.params.id +"/"+ item.item_id);
     },
-    
+    // autorization(){
+    //   let getLocalStorage =  JSON.parse(localStorage.getItem('autorizacion'))
+    //   let autorizacion = getLocalStorage.item_id
+    //   console.log(this.store)
+    //   if (autorizacion === this.store.store_id){
+    //     this.autorizacion = true
+    //   }
+    // },
     addItem(item){
       addItemToCart(item)
       

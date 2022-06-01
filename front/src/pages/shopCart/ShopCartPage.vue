@@ -78,7 +78,7 @@ export default{
         return true;
       }
     },
-        async sendInfo() {
+      async sendInfo() {
         this.info.allItems = this.items
       if (!this.isValidInfoForm()) {
         alert("SE DEBE RELLENAR EL EMAIL");
@@ -122,7 +122,7 @@ width: 100vw;
 .email{
   width: 40%;
   margin-top: 10px;
-  height: 2em;
+  height: 1.5em;
   text-align: center;
  
 }

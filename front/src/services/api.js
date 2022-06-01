@@ -1,5 +1,6 @@
 import config from "@/config.js";
 
+
 export async function loadData(id) {
   const settings = {
     methods: "GET",
@@ -41,4 +42,22 @@ export async function sendData(info){
     alert("EL EMAIL PROPORCIONADO NO ES VALIDO, INTRODUZCA UNO VALIDO")
   }
 
+}
+export async function adminLogin(info){
+  const settings = {
+    method: "POST",
+    body: JSON.stringify(info),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  let response = await fetch(`${config.API_PATH}/adminLogin`, settings);
+  
+  
+  if (response.status == 200){
+    localStorage.setItem('autorizacion', JSON.stringify(await response.json()));
+    alert("Se ha logeado correctamente ya puede acceder al menu admin de su tienda ")
+  } else {
+    alert("NO SE A PODIDO ACCEDER CON SUS DATOS, REVISE SUS DATOS")
+  }
 }

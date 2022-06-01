@@ -14,6 +14,7 @@
         <button class="shopButton" @click=" openShopCart()">
           🛒
         </button>
+        <button class="shopButton" @click="openAdminlogin()">Lapiz</button>
       </div>
     <div class="landing">
       <div class="stores" v-for="store in filteredStores" :key="store.store_id" >
@@ -82,6 +83,9 @@ export default {
     },
     openShopCart() {
       this.$router.push("/shopCart");
+    },
+    openAdminlogin() {
+      this.$router.push("/adminLogin");
     },
     itemFilter(store){
       for (let item of store.items){

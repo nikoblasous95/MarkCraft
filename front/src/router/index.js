@@ -21,6 +21,16 @@ const routes = [
     name: 'ShopCart',
     component: () => import('@/pages/shopCart/ShopCartPage.vue'),
   },
+  {
+    path: '/adminLogin',
+    name: 'adminLogin',
+    component: () => import('@/pages/adminLogin/AdminLoginPage.vue'),
+  },
+  {
+    path: '/adminStore',
+    name: 'adminStore',
+    component: () => import('@/pages/adminStoreModify/AdminStorePage.vue'),
+  },
 
   
 ]

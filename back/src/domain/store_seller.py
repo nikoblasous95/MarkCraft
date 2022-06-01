@@ -1,6 +1,8 @@
 import sqlite3
 from unittest import result
 
+from src.lib.utils import object_to_json
+
 from src.domain.items import ItemsRepository
 
 # database_path = "data/database.db"
@@ -102,7 +104,19 @@ class StoreSellerRepository:
                 store_id
             )
             result.append(store_seller)
+        
         return result
+
+    def validate_login(self,data):
+        stores = self.get_stores()
+        login_email = data["email"]
+        login_phone= data["phone"]
+        for store in stores:
+            if store.seller_email == login_email and store.seller_phone == login_phone:
+                response = store.store_id
+                print(response)
+                return response
+        
 
     def get_seller_info_for_buyer(self,item_id):
         sql="""
@@ -120,9 +134,6 @@ class StoreSellerRepository:
         return seller_info
         
        
-
-        
-
     def save_store_seller(self, store):
         sql = """insert into storeSeller (store_id,store_name,store_description,seller_name,seller_email,seller_phone,store_category) 
         values (:store_id,:store_name, :store_description, :seller_name, :seller_email, :seller_phone,  :store_category)"""
