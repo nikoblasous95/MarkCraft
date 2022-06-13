@@ -27,12 +27,17 @@ const routes = [
     component: () => import('@/pages/adminLogin/AdminLoginPage.vue'),
   },
   {
-    path: '/adminStore',
+    path: '/adminStore/:store_id',
     name: 'adminStore',
     component: () => import('@/pages/adminStoreModify/AdminStorePage.vue'),
   },
+  {
+    path: '/adminItems/:store_id',
+    name: 'adminItems',
+    component: () => import('@/pages/adminItems/AdminItemsMenuPage.vue'),
+  },
 
-  
+
 ]
 
 const router = createRouter({

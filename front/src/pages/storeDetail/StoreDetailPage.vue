@@ -9,7 +9,7 @@
         <button class="shopButton" @click=" openShopCart()">
           🛒
         </button>
-        <!-- <button @click="adminMenu()" v-if="autorizacion">Herramienta</button> -->
+        <button @click="adminMenu()" v-if="autorization">Herramienta</button>
       </div>
     <div class="filters">
       <input class="inputFilter" type="text" placeholder="Escribe aqui tu busqueda" v-model="filterBySearch">
@@ -51,7 +51,7 @@ export default {
     return {
       store:{},
       filterBySearch:"",
-      autorizacion:false,
+      autorization:false,
     };
   },
     created() {
@@ -59,7 +59,7 @@ export default {
       
     },
     mounted(){
-    //   this.autorization();
+    this.autorizationFunction()
     },
   computed: {
     filteredItems(){
@@ -83,14 +83,15 @@ export default {
       console.log(item)
       this.$router.push("/storeDetail/"+ this.$route.params.id +"/"+ item.item_id);
     },
-    // autorization(){
-    //   let getLocalStorage =  JSON.parse(localStorage.getItem('autorizacion'))
-    //   let autorizacion = getLocalStorage.item_id
-    //   console.log(this.store)
-    //   if (autorizacion === this.store.store_id){
-    //     this.autorizacion = true
-    //   }
-    // },
+    autorizationFunction(){
+      let getLocalStorage =  JSON.parse(localStorage.getItem('autorizacion'))
+      let autorizacion = getLocalStorage.store_id
+      
+      console.log(this.store.store_id)
+      if (autorizacion == this.store.store_id){
+        this.autorization = true
+      }
+    },
     addItem(item){
       addItemToCart(item)
       
@@ -114,6 +115,10 @@ export default {
      openShopCart() {
       this.$router.push("/shopCart");
     },
+    adminMenu(){
+      this.$router.push("/adminStore/" + this.store.store_id );
+    }
+
    
   },
 };

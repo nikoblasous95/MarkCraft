@@ -15,8 +15,8 @@ export async function loadData(id) {
 
   return loadData;
 }
-export async function loadItem(id){
-    const settings = {
+export async function loadItem(id) {
+  const settings = {
     methods: "GET",
     headers: {
       Authorization: localStorage.userId,
@@ -27,7 +27,7 @@ export async function loadItem(id){
   return loadItem
 }
 
-export async function sendData(info){
+export async function sendData(info) {
   const settings = {
     method: "POST",
     body: JSON.stringify(info),
@@ -36,14 +36,14 @@ export async function sendData(info){
     },
   };
   let response = await fetch(`${config.API_PATH}/buyingItems`, settings);
-  if (response.status == 200){
+  if (response.status == 200) {
     alert("Revise su correo, se ha enviado la informacion del vendedor");
   } else {
     alert("EL EMAIL PROPORCIONADO NO ES VALIDO, INTRODUZCA UNO VALIDO")
   }
 
 }
-export async function adminLogin(info){
+export async function adminLogin(info) {
   const settings = {
     method: "POST",
     body: JSON.stringify(info),
@@ -52,12 +52,27 @@ export async function adminLogin(info){
     },
   };
   let response = await fetch(`${config.API_PATH}/adminLogin`, settings);
-  
-  
-  if (response.status == 200){
+
+
+  if (response.status == 200) {
     localStorage.setItem('autorizacion', JSON.stringify(await response.json()));
     alert("Se ha logeado correctamente ya puede acceder al menu admin de su tienda ")
   } else {
     alert("NO SE A PODIDO ACCEDER CON SUS DATOS, REVISE SUS DATOS")
   }
+}
+
+export async function modifyStore(store, store_id) {
+  const settings = {
+    method: "PUT",
+    body: JSON.stringify(store, store_id),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  await fetch(
+    `${config.API_PATH}/storeModify/${store_id}`,
+    settings
+  );
+
 }

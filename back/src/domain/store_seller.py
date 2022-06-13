@@ -7,18 +7,18 @@ from src.domain.items import ItemsRepository
 
 # database_path = "data/database.db"
 class SellerInfo:
-    def __init__(self,seller_name,seller_email,seller_phone):
+    def __init__(self, seller_name, seller_email, seller_phone):
         self.seller_name = seller_name
         self.seller_email = seller_email
         self.seller_phone = seller_phone
-        
-    
+
     def to_dict(self):
         return {
             "seller_name": self.seller_name,
             "seller_email": self.seller_email,
-            "seller_phone": self.seller_phone
+            "seller_phone": self.seller_phone,
         }
+
 
 class StoreSeller:
     def __init__(
@@ -104,22 +104,35 @@ class StoreSellerRepository:
                 store_id
             )
             result.append(store_seller)
-        
+
         return result
 
-    def validate_login(self,data):
+    def modify_store(self, store_id, store):
+        sql = """
+        UPDATE storeSeller
+            SET store_name= :store_name, store_description= :store_description,store_category=:store_category
+            WHERE store_id = :store_id 
+        """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        params = store.to_dict()
+        params["id"] = store_id
+        cursor.execute(sql, params)
+        conn.commit()
+        conn.close()
+
+    def validate_login(self, data):
         stores = self.get_stores()
         login_email = data["email"]
-        login_phone= data["phone"]
+        login_phone = data["phone"]
         for store in stores:
             if store.seller_email == login_email and store.seller_phone == login_phone:
                 response = store.store_id
                 print(response)
                 return response
-        
 
-    def get_seller_info_for_buyer(self,item_id):
-        sql="""
+    def get_seller_info_for_buyer(self, item_id):
+        sql = """
         SELECT storeSeller.seller_name, storeSeller.seller_email,storeSeller.seller_phone FROM storeSeller
         INNER JOIN storeItems on storeSeller.store_id = storeItems.store_id
         INNER JOIN items on storeItems.item_id = items.item_id
@@ -132,8 +145,7 @@ class StoreSellerRepository:
         seller_info = SellerInfo(**data).to_dict()
         print(seller_info)
         return seller_info
-        
-       
+
     def save_store_seller(self, store):
         sql = """insert into storeSeller (store_id,store_name,store_description,seller_name,seller_email,seller_phone,store_category) 
         values (:store_id,:store_name, :store_description, :seller_name, :seller_email, :seller_phone,  :store_category)"""
@@ -156,6 +168,5 @@ class StoreSellerRepository:
             store_seller.items = self.items_repository.get_items_by_store_seller_id(
                 store_id
             )
-            
-        
+
         return store_seller
