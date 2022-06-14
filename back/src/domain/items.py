@@ -67,15 +67,29 @@ CREATE TABLE if not EXISTS "storeItems" (
         all_items = [Items(**item) for item in data]
         return all_items
 
+    def modify_item(self, item_id, item):
+        sql = """
+        UPDATE items
+            SET item_name= :item_name, item_description= :item_description,item_category=:item_category
+            WHERE item_id = :item_id 
+        """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        params = item.to_dict()
+        params["id"] = item_id
+        cursor.execute(sql, params)
+        conn.commit()
+        conn.close()
+
     def get_items_by_id(self, item_id):
         sql = """SELECT  * FROM items where item_id=:item_id"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, {"item_id": item_id})
-        data = cursor.fetchall()
-        all_items = [Items(**item) for item in data]
-        
-        return all_items
+        data = cursor.fetchone()
+        item = Items(**data)
+
+        return item
 
     def save_items(self, item):
         sql = """
@@ -85,6 +99,20 @@ CREATE TABLE if not EXISTS "storeItems" (
         cursor = conn.cursor()
         cursor.execute(sql, item.to_dict())
         conn.commit()
+
+    def get_items_id_from_one_store(self, store_id):
+        sql = """
+        select item_id from storeItems where store_id =:store_id
+        """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, {"store_id": store_id})
+        items_id = cursor.fetchall()
+        result = []
+        for item in items_id:
+            result.append(item[0])
+        print(result)
+        return result
 
     def get_items_by_store_seller_id(self, store_id):
         conn = self.create_conn()

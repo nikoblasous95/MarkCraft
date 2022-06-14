@@ -11,12 +11,16 @@
         </button>
       </div>
     <h1>hola</h1>
-    <div v-for="item in items" :key="item.item_id"> 
-        <p>{{item.item_id}}</p>
+      <div>
+       <p>{{item.item_id}}</p>
         <p>{{item.item_name}}</p>
         <p>{{item.item_description}}</p>
+        <p>{{item.item_category}}</p>
         <button @click="addItem(item)">Añadir al carrito</button>
-    </div>
+      </div>
+      
+       
+    
 </div>
 
    
@@ -28,7 +32,7 @@ export default{
     name:"ItemDetail",
     data(){
         return {
-            items : [{}],
+            item : {},
             itemId : this.$route.params.id,
         };
     },
@@ -42,7 +46,8 @@ export default{
     async loadItems() {
         let itemId = this.$route.params.id;
         console.log(itemId)
-        this.items = await loadItem(itemId);
+        this.item = await loadItem(itemId);
+        
     },
     addItem(item){
         console.log(item)
@@ -51,6 +56,7 @@ export default{
     openShopCart() {
       this.$router.push("/shopCart");
     },
+   
     }
 
 }

@@ -182,9 +182,9 @@ export default {
   grid-template-areas:
     "nav nav nav nav"
     "filters filters filters shop"
-    "image image main main "
-    "image image main main "
-    "image image main main";
+    "image main main main "
+    "image main main main "
+    "image main main main";
 }
 .nav {
   grid-area: nav;
@@ -202,7 +202,9 @@ export default {
 .store{
   margin: 0px;
   padding: 0;
-  
   width: 100%;
+  
 }
+ 
+
 </style>

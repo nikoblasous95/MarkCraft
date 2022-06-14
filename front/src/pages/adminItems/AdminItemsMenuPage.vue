@@ -8,9 +8,10 @@
             <p>{{item.item_name}}</p>
             <p>{{item.item_description}}</p>
             <p>{{item.item_category}}</p>
-            <button @click="modifyItem()">Modificar item</button>
+            <button @click="modifyItem(item.item_id)">Modificar item</button>
         </div>
     </div>
+    <button @click="goToAddItem()">Añadir item</button>
 </template>
 
 <script>
@@ -29,11 +30,16 @@ export default {
     methods:{
         async loadData(){
             this.store = await loadData(this.$route.params.store_id )
-            console.log(this.store)
+            
         },
-        modifyItem(){
-            this.$route.push("/")
+        modifyItem(item){
+            this.$router.push("/adminItems/"+ this.$route.params.store_id + "/" + item)
+        },
+        goToAddItem(){
+            this.$router.push("/adminAddItems/"+ this.$route.params.store_id )
         }
+
+
     }
 }
 </script>

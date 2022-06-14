@@ -3,9 +3,12 @@ from flask_cors import CORS
 import smtplib
 from email.message import EmailMessage
 import re
+
+
 from src.domain.email_sender import Email
 from src.lib.utils import object_to_json
 from src.domain.store_seller import StoreSeller, StoreSellerRepository
+from src.domain.items import Items, ItemsRepository
 
 
 def create_app(repositories):
@@ -34,6 +37,25 @@ def create_app(repositories):
         store = StoreSeller(**data)
         repositories["stores"].modify_store(id, store)
         return "hello", 200
+
+    @app.route("/api/itemModify/<id>", methods=["PUT"])
+    def modify_item(id):
+        data = request.json
+        print(data)
+        item = Items(**data)
+        repositories["items"].modify_item(id, item)
+        return "hello", 200
+
+    @app.route("/api/addItem/<id>", methods=["POST"])
+    def addItem(id):
+        data = request.json
+        item = Items(**data)
+        save_items = repositories["items"].save_items(item)
+        ids = repositories["items"].get_items_id_from_one_store(id)
+        item_id = item.item_id
+        ids.append(item_id)
+        create_midd_table = repositories["items"].save_store_seller_items(id, ids)
+        return "", 200
 
     @app.route("/api/stores/<id>", methods=["GET"])
     def get_store_by_id(id):

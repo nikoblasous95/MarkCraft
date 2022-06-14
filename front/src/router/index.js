@@ -12,7 +12,7 @@ const routes = [
     component: () => import('@/pages/storeDetail/StoreDetailPage.vue'),
   },
   {
-    path: '/storeDetail/:id/:id',
+    path: '/storeDetail/:id/:item_id',
     name: 'ItemDetail',
     component: () => import('@/pages/itemDetail/ItemDetailPage.vue'),
   },
@@ -35,6 +35,16 @@ const routes = [
     path: '/adminItems/:store_id',
     name: 'adminItems',
     component: () => import('@/pages/adminItems/AdminItemsMenuPage.vue'),
+  },
+  {
+    path: '/adminItems/:store_id/:item_id',
+    name: 'adminItemsModify',
+    component: () => import('@/pages/adminModifyItems/AdminModifyItemPage.vue'),
+  },
+  {
+    path: '/adminAddItems/:store_id',
+    name: 'adminAddItem',
+    component: () => import('@/pages/adminAddItem/AdminAddItemPage.vue'),
   },
 
 

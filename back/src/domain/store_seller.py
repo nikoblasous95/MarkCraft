@@ -162,7 +162,6 @@ class StoreSellerRepository:
         cursor = conn.cursor()
         cursor.execute(sql, {"store_id": store_id})
         data = cursor.fetchone()
-        result = []
         if dict(data):
             store_seller = StoreSeller(**data)
             store_seller.items = self.items_repository.get_items_by_store_seller_id(

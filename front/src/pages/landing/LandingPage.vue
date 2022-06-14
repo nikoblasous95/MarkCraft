@@ -122,8 +122,13 @@ export default {
   background-color: rgb(212, 245, 220);
   flex-direction: row;
   margin: 5px;
+  transition: transform .2s; 
+}
+.stores:hover {
+    transform: scale(1.05); 
 }
 .shop{
+
   grid-area: shop;
  padding-top: 2em;
  

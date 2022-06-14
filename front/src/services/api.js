@@ -76,3 +76,31 @@ export async function modifyStore(store, store_id) {
   );
 
 }
+export async function modifyItem(item, item_id) {
+  const settings = {
+    method: "PUT",
+    body: JSON.stringify(item, item_id),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  await fetch(
+    `${config.API_PATH}/itemModify/${item_id}`,
+    settings
+  );
+
+}
+
+export async function addItem(item, store_id) {
+  const settings = {
+    method: "POST",
+    body: JSON.stringify(item, store_id),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  await fetch(
+    `${config.API_PATH}/addItem/${store_id}`,
+    settings
+  );
+}
