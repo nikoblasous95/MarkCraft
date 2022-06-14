@@ -14,7 +14,7 @@
         <button class="shopButton" @click=" openShopCart()">
           🛒
         </button>
-        <button class="shopButton" @click="openAdminlogin()">Lapiz</button>
+        <button class="shopButton" @click="openAdminlogin()">📝</button>
       </div>
     <div class="landing">
       <div class="stores" v-for="store in filteredStores" :key="store.store_id" >
@@ -123,6 +123,7 @@ export default {
   flex-direction: row;
   margin: 5px;
   transition: transform .2s; 
+  
 }
 .stores:hover {
     transform: scale(1.05); 
@@ -130,14 +131,20 @@ export default {
 .shop{
 
   grid-area: shop;
- padding-top: 2em;
+ display: flex;
  
 }
 .shopButton{
   align-content: center;
   width: 30%;
   height: 30px;
-  
+  margin:auto;
+  border: 1px solid;
+  border-color: #31ac4c;
+   transition: all 0.2s ;
+}
+.shopButton:hover{
+  transform: scale(1.05); 
 }
 
 .image {
@@ -161,6 +168,7 @@ export default {
   width: 60%;
   height: 25px;
   align-content: center;
+  margin: auto;
 }
 .store p {
   padding: 0%;
@@ -171,7 +179,7 @@ export default {
   width: 100%;
   height: 100%;
   /* background-color: rgb(208, 245, 245); */
-  padding-top: 2em;
+  display: flex;
 }
 
 

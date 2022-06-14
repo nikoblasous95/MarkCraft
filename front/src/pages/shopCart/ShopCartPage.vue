@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="title">
-      <h1>Tu lista de Items {{numberOfItems}}</h1>
+      <h1>Tu lista de Items </h1>
       <button @click="buyItems">Comprar</button>
       <div>
       <input name="email" class="email" id="email" placeholder="Introduce aqui tu email y pulsa enter" v-model="this.info.email" v-show="visualizacion" >
@@ -88,14 +88,7 @@ export default{
       await sendData(this.info);
       this.isLoading = false;
       this.visualizacion = false
-      
-      
-      
-
     },
-          
-
-
         
         
 }

@@ -9,7 +9,7 @@
         <button class="shopButton" @click=" openShopCart()">
           🛒
         </button>
-        <button @click="adminMenu()" v-if="autorization">Herramienta</button>
+        <button @click="adminMenu()" v-if="autorization" class="shopButton">⚙️</button>
       </div>
     <div class="filters">
       <input class="inputFilter" type="text" placeholder="Escribe aqui tu busqueda" v-model="filterBySearch">
@@ -136,17 +136,22 @@ export default {
 .itemImage{
   width: 40%;
   height: 40%;
+  margin: auto;
 }
 .image{
   grid-area: image;
   width: 100%;
   height: 100%;
+  
+  
+
  
 }
 .inputFilter{
   width: 60%;
   height: 25px;
   align-content: center;
+  margin: auto;
 }
 .main{
   grid-area: main;
@@ -159,18 +164,26 @@ export default {
   width: 100%;
   height: 100%;
   /* background-color: rgb(208, 245, 245); */
-  padding-top: 2em;
+  display: flex;
 }
 .shop{
   grid-area: shop;
- padding-top: 2em;
+  display: flex;
+  ;
+ 
  
 }
 .shopButton{
   align-content: center;
   width: 30%;
   height: 30px;
-  
+  margin:auto;
+  border: 1px solid;
+  border-color: #31ac4c;
+   transition: all 0.2s ;
+}
+.shopButton:hover{
+  transform: scale(1.05); 
 }
 .gridContainer{
   width: 100vw;
@@ -181,7 +194,7 @@ export default {
   grid-template-rows: 0.2fr 0.3fr 1fr 1fr;
   grid-template-areas:
     "nav nav nav nav"
-    "filters filters filters shop"
+    "filters filters shop shop"
     "image main main main "
     "image main main main "
     "image main main main";
@@ -198,12 +211,16 @@ export default {
   background-color: rgb(255, 255, 255);
   flex-direction: row;
   margin: 5px;
+  transition: transform .2s;
 }
 .store{
   margin: 0px;
   padding: 0;
   width: 100%;
-  
+    
+}
+.item:hover {
+    transform: scale(1.05); 
 }
  
 
