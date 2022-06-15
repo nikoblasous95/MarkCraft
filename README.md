@@ -6,7 +6,7 @@
 
 
 
-Cuando inicialize la web usted estara como usuario normal, sin permisos de administrador, es decir usted podra navegar por la parte publica del proyecto pudiendo añadir a su carrito de la compra items de distintas tiendas y comprandolas asi como ver los distintos items que hay en las tiendas y accediendo a los detalles de item(funcionalidad de comprar a traves de email se encuentra bajo mantenimiento) para acceder a la parte de administracion de su tienda sigue los siguiuentes pasos.
+Cuando inicialize la web usted estara como usuario normal, sin permisos de administrador, es decir usted podra navegar por la parte publica del proyecto pudiendo añadir a su carrito de la compra items de distintas tiendas y comprandolas asi como ver los distintos items que hay en las tiendas y accediendo a los detalles de item(**funcionalidad de comprar a traves de email se encuentra bajo mantenimiento**) para acceder a la parte de administracion de su tienda sigue los siguiuentes pasos.
 
 1.En la pantalla principal arriba a la derecha podra encontar un boton con una libreta y un lapiz, pulse en ella.
 
