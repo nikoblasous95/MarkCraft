@@ -18,13 +18,13 @@ npm run build
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### Uso de la aplicación:
+# Uso de la aplicación:
 
-    Cuando inicialize la web usted estara como usuario normal, sin permisos de administrador, es decir usted podra navegar por la parte publica del proyecto pudiendo añadir a su carrito de la compra items de distintas tiendas y comprandolas (**funcionalidad de comprar a traves de email se encuentra bajo mantenimiento**) para acceder a la parte de administracion de su tienda sigue los siguiuentes pasos.
+    Cuando inicialize la web usted estara como usuario normal, sin permisos de administrador, es decir usted podra navegar por la parte publica del proyecto pudiendo añadir a su carrito de la compra items de distintas tiendas y comprandolas asi como ver los distintos items que hay en las tiendas y accediendo a los detalles de item(funcionalidad de comprar a traves de email se encuentra bajo mantenimiento) para acceder a la parte de administracion de su tienda sigue los siguiuentes pasos.
 
     1.En la pantalla principal arriba a la derecha podra encontar un boton con una libreta y un lapiz, pulse en ella.
 
-    2.Una vez en la pantalla de *login* tendras que introducir los datos correspondientes y correctos asociados a su tienda ,a continuacion os dejo los datos de 3 tiendas para que podais entrar a distintas tiendas en modo administrador.
+    2.Una vez en la pantalla de login tendras que introducir los datos correspondientes y correctos asociados a su tienda ,a continuacion os dejo los datos de 3 tiendas para que podais entrar a distintas tiendas en modo administrador.
         """
         email tienda txiflo="txiflo@gmail.com",
         telefono tienda txiflo="66786755",
@@ -44,3 +44,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
     4.Una vez dentro del menu de administrador podra ver como el color de la página ha cambiado eso indica que esta como administrador podra modificar los datos de su tienda como le indica y podra acceder al menu de items a traves del boton *menu de items*.
 
     5.En el menu de items podra modificar un item existente con el boton modificar item, o de lo contrario podra añadir un item nuevo a la tienda con el boton añadir item.
+
+
+    !!IMPORTANTE¡¡
+    -Proyecto en fase ALFA multiple deuda tecnica que se resolvera en proximas versiones
+
+
+
