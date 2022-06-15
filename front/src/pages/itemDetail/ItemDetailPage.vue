@@ -44,7 +44,7 @@ export default{
     },
     methods:{
     async loadItems() {
-        let itemId = this.$route.params.id;
+        let itemId = this.$route.params.item_id;
         console.log(itemId)
         this.item = await loadItem(itemId);
         

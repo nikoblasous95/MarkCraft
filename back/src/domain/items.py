@@ -1,7 +1,5 @@
 import sqlite3
 
-from pytest import Item
-
 
 class Items:
     def __init__(
@@ -111,7 +109,6 @@ CREATE TABLE if not EXISTS "storeItems" (
         result = []
         for item in items_id:
             result.append(item[0])
-        print(result)
         return result
 
     def get_items_by_store_seller_id(self, store_id):

@@ -19,7 +19,6 @@ export async function loadItem(id) {
   const settings = {
     methods: "GET",
     headers: {
-      Authorization: localStorage.userId,
     },
   };
   let response = await fetch(`${config.API_PATH}/items/${id}`, settings);

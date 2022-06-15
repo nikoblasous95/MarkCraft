@@ -103,6 +103,10 @@ export default {
 #email{
     margin: 1em;
     grid-area: email;
+    width: 60%;
+  height: 20px;
+  align-content: center;
+  margin: auto;
 }
 .phone-label{
     margin: 1em;
@@ -113,9 +117,17 @@ export default {
 #phone{
     margin: 1em;
     grid-area: email;
+    width: 60%;
+  height: 20px;
+  align-content: center;
+  margin: auto;
 }
 .submit-button{
-    margin: 1em;
+    width: 60%;
+    height: 20px;
+    align-content: center;
+    margin: auto;
+    margin-top: 2em;
     grid-area: submit-button;
     border: 1px solid;
     border-color: #31ac4c;
