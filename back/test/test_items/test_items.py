@@ -25,9 +25,9 @@ def test_get_item_by_id():
     items_repository.save_items(item_txiflo)
     response = client.get("/api/items/item-1")
 
-    assert response.json == [{
+    assert response.json == {
         "item_id": "item-1",
         "item_name": "Pelotas de perro",
         "item_description": "Esto es una pelota para perros de la ostia",
         "item_category": "Pelotas",
-    }]
+    }

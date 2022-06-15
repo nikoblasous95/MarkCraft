@@ -44,7 +44,6 @@ def test_should_return_store_in_database():
         store_category="Perrunas",
         seller_email="txiflo@gmail.com",
         seller_phone="66786755",
-        
     )
     items_repository.save_items(item_txiflo)
 
@@ -143,9 +142,7 @@ def test_validate_admin():
     )
     client = app.test_client()
 
-    body = {
-        "email":"txiflo@gmail.com",
-        "phone":"66786755"}
+    body = {"email": "txiflo@gmail.com", "phone": "66786755"}
 
     tienda_de_txiflo = StoreSeller(
         store_id="store-5",
@@ -155,10 +152,10 @@ def test_validate_admin():
         store_category="Perrunas",
         seller_email="txiflo@gmail.com",
         seller_phone="66786755",
-        
     )
     store_seller_repository.save_store_seller(tienda_de_txiflo)
 
-    response = client.post("/api/adminLogin",json=body)
+    response = client.post("/api/adminLogin", json=body)
 
-    assert response == "store-5"
+    assert response.status_code == 200
+    assert response.data == b'{"store_id":"store-5"}\n'
