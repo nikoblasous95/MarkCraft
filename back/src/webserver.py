@@ -92,10 +92,10 @@ def create_app(repositories):
             seller_info = repositories["stores"].get_seller_info_for_buyer(item_id)
             seller_info.update({"item_id": item_id})
             seller_info.update({"item_name": item_name})
-            email = Email
-            sending_email = email.send_email(seller_info)
-            print(seller_info)
-            result.append(seller_info)
+            # email = Email
+            # sending_email = email.send_email(seller_info)
+            # print(seller_info)
+            # result.append(seller_info)
         return "", 200
 
         # for element in result:
