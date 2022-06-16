@@ -85,12 +85,16 @@ export default {
     },
     autorizationFunction(){
       let getLocalStorage =  JSON.parse(localStorage.getItem('autorizacion'))
-      let autorizacion = getLocalStorage.store_id
-      
-      console.log(this.store.store_id)
-      if (autorizacion == this.store.store_id){
+      if (getLocalStorage != null){
+        let autorizacion = getLocalStorage.store_id
+        if (autorizacion == this.store.store_id){
         this.autorization = true
       }
+      }
+      
+      
+      console.log(this.store.store_id)
+      
     },
     addItem(item){
       addItemToCart(item)
