@@ -5,7 +5,7 @@ from email.message import EmailMessage
 import re
 
 
-from src.domain.email_sender import Email
+# from src.domain.email_sender import Email
 from src.lib.utils import object_to_json
 from src.domain.store_seller import StoreSeller, StoreSellerRepository
 from src.domain.items import Items, ItemsRepository
