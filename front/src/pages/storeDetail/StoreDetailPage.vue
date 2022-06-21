@@ -93,7 +93,7 @@ export default {
       }
       
       
-      console.log(this.store.store_id)
+      
       
     },
     addItem(item){
